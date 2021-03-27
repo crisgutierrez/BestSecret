@@ -41,17 +41,18 @@ dependencies {
     implementation project(':domain')
     implementation project(':data')
 
+//  Android
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$core_ktx"
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "com.google.android.material:material:$material"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_ktx_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ktx_version"
+    implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test.ext:junit:$junit_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
-
-
-    implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
 
 //  Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -67,6 +68,7 @@ dependencies {
 //  Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
 //  Room
     implementation "androidx.room:room-runtime:$room_version"

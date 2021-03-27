@@ -13,3 +13,15 @@ data class Product(
     val link: String,
     val type: String
 )
+
+sealed class ProductQueryParam {
+
+    data class QueryAllProducts(
+        val page: Int,
+        val pageSize: Int
+    ): ProductQueryParam()
+
+    data class QueryProductById(
+        val productId: Int
+    ): ProductQueryParam()
+}

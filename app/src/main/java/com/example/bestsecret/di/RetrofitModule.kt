@@ -1,14 +1,23 @@
 package com.example.bestsecret.di
 
 import com.example.bestsecret.data.network.service.ProductService
+import com.example.bestsecret.data.network.utils.NetworkConstants.AUTHORIZATION
+import com.example.bestsecret.data.network.utils.NetworkConstants.AUTHORIZATION_TOKEN
+import com.example.bestsecret.data.network.utils.NetworkConstants.BASE_URL
+import com.example.bestsecret.data.network.utils.NetworkConstants.TIMEOUT_IN_SECONDS
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -23,9 +32,50 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(gson: Gson): Retrofit.Builder{
+    fun providesLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Singleton
+    @Provides
+    fun providesRequestInterceptor() : Interceptor {
+        return  Interceptor { chain: Interceptor.Chain ->
+            val original: Request = chain.request()
+            val requestBuilder: Request.Builder = original.newBuilder()
+                .addHeader("Accept", "Application/JSON")
+                .addHeader(AUTHORIZATION, AUTHORIZATION_TOKEN)
+            val request: Request = requestBuilder.build()
+            chain.proceed(request)
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(
+        requestInterceptor: Interceptor,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        val okHttpClient = OkHttpClient().newBuilder()
+
+        okHttpClient.callTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+        okHttpClient.connectTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+        okHttpClient.readTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+        okHttpClient.writeTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+        okHttpClient.addInterceptor(requestInterceptor)
+        okHttpClient.addInterceptor(loggingInterceptor)
+        okHttpClient.build()
+        return okHttpClient.build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(
+        gson: Gson,
+        okHttpClient: OkHttpClient
+    ): Retrofit.Builder{
         return Retrofit.Builder()
-                .baseUrl("https://bestsecret-recruitment-api.herokuapp.com/")
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
     }
 
