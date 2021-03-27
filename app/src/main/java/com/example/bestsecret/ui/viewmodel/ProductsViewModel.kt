@@ -1,12 +1,10 @@
-package com.example.bestsecret.ui
+package com.example.bestsecret.ui.viewmodel
 
 import androidx.lifecycle.*
-import com.example.bestsecret.data.repository.ProductRepositoryImpl
 import com.example.bestsecret.domain.model.Product
 import com.example.bestsecret.domain.model.ProductQueryParam
 import com.example.bestsecret.domain.state.DataState
 import com.example.bestsecret.domain.usecase.GetAllProductsUseCase
-import com.example.bestsecret.domain.usecase.GetProductByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -14,12 +12,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel
+class ProductsViewModel
 @Inject
 constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val getAllProductsUseCase: GetAllProductsUseCase,
-    private val getProductByIdUseCase: GetProductByIdUseCase
+    private val getAllProductsUseCase: GetAllProductsUseCase
 ): ViewModel(){
     private val _dataState: MutableLiveData<DataState<List<Product>>> = MutableLiveData()
     val dataState: LiveData<DataState<List<Product>>> = _dataState
@@ -33,12 +30,6 @@ constructor(
                             _dataState.value = it
                         }.launchIn(viewModelScope)
                 }
-                is MainStateEvent.GetProductByEvent -> {
-                    getProductByIdUseCase.getProductById(ProductQueryParam.QueryProductById(1))
-                        .onEach {
-//                            _dataState.value = listOf(it)
-                        }.launchIn(viewModelScope)
-                }
             }
         }
     }
@@ -48,6 +39,5 @@ constructor(
 sealed class MainStateEvent {
 
     object GetAllProductsEvent: MainStateEvent()
-    object GetProductByEvent: MainStateEvent()
 
 }
