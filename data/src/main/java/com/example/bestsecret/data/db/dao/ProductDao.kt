@@ -1,9 +1,6 @@
 package com.example.bestsecret.data.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.bestsecret.data.db.model.ProductCacheEntity
 
 @Dao
@@ -11,7 +8,16 @@ interface ProductDao {
 
     //INSERT or UPDATE if exists
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUpdateProduct(AlertEntity: ProductCacheEntity)
+    suspend fun insertUpdateProduct(productCacheEntity: ProductCacheEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllProducts(productCacheEntityList: List<ProductCacheEntity>)
+
+    @Transaction
+    suspend fun replaceAllActionTaskList(productCacheEntityList: List<ProductCacheEntity>) {
+        clearProductTable()
+        insertAllProducts(productCacheEntityList)
+    }
 
 
     //GET

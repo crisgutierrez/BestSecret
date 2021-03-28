@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BestSecret</string>
+
+    <string name="product_item_old_price">%1$s %2$s</string>
+    <string name="product_item_price">%1$s %2$s</string>
+    <string name="product_item_discount"> -%1$d%% </string>
+
 </resources>
