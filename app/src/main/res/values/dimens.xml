@@ -16,4 +16,7 @@
     <dimen name="product_item_name_size">12sp</dimen>
     <dimen name="product_item_secondary_price_size">14sp</dimen>
     <dimen name="product_item_price_size">18sp</dimen>
+
+<!--    Product details dimens  -->
+    <dimen name="product_details_discount_image_size">100dp</dimen>
 </resources>

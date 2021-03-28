@@ -15,7 +15,10 @@ import com.example.bestsecret.ext.loadFromUrl
 import com.example.bestsecret.utils.formatNumberToTwoDigits
 import com.example.bestsecret.utils.getPriceWithDiscount
 
-class ProductsAdapter() : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
+class ProductsAdapter(
+    private val onProductClick: (Product) -> Unit,
+    private val onAddToCartClick: () -> Unit
+) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
     private var productList: List<Product> = emptyList()
     private lateinit var context: Context
@@ -28,22 +31,29 @@ class ProductsAdapter() : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = productList[position]
-        holder.productImage.loadFromUrl(item.image)
-        holder.productName.text = item.name
-        holder.productPrice.text = context.getString(R.string.product_item_price, item.currency, getPriceWithDiscount(item.price, item.discountPercentage))
+        val product = productList[position]
+        holder.productImage.loadFromUrl(product.image)
+        holder.productName.text = product.name
+        holder.productPrice.text = context.getString(R.string.product_item_price, getPriceWithDiscount(product.price, product.discountPercentage), product.currency)
 
         // productOldPrice is only visible if the discount is not 0
-        holder.productOldPrice.isVisible = item.discountPercentage != 0
-        holder.productOldPrice.text = context.getString(R.string.product_item_old_price, item.currency, formatNumberToTwoDigits(item.price.toDouble()))
+        holder.productOldPrice.isVisible = product.discountPercentage != 0
+        holder.productOldPrice.text = context.getString(R.string.product_item_old_price, formatNumberToTwoDigits(product.price.toDouble()), product.currency)
         holder.productOldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
         // productDiscount is only visible if the discount is not 0
-        holder.productDiscount.isVisible = item.discountPercentage != 0
-        holder.productDiscount.text = context.getString(R.string.product_item_discount, item.discountPercentage)
+        holder.productDiscount.isVisible = product.discountPercentage != 0
+        holder.productDiscount.text = context.getString(R.string.product_item_discount, product.discountPercentage)
 
         // Set favorite button click listener
         holder.productFavorite.setOnClickListener { holder.productFavorite.isSelected = !holder.productFavorite.isSelected }
+
+        // Set Add to cart button, this button is only visible if we have stock.
+        holder.productAddToCart.isVisible = product.stock > 0
+        holder.productAddToCart.setOnClickListener { onAddToCartClick.invoke() }
+
+        // Set item listener
+        holder.itemView.setOnClickListener { onProductClick(product) }
 
     }
 
@@ -57,6 +67,7 @@ class ProductsAdapter() : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val productImage: ImageView = view.findViewById(R.id.product_item_image)
         val productFavorite: ImageView = view.findViewById(R.id.product_item_favorite)
+        val productAddToCart: ImageView = view.findViewById(R.id.product_item_add_to_cart)
         val productName: TextView = view.findViewById(R.id.product_item_name)
         val productOldPrice: TextView = view.findViewById(R.id.product_item_old_price)
         val productPrice: TextView = view.findViewById(R.id.product_item_price)

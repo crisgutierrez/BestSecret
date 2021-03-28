@@ -9,6 +9,25 @@
         android:id="@+id/productsFragment"
         android:name="com.example.bestsecret.ui.view.ProductsFragment"
         android:label="ProductsFragment"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_productsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.example.bestsecret.ui.view.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout="@layout/product_details_fragment" >
+        <argument
+            android:name="productId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
