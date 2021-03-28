@@ -6,6 +6,7 @@
     android:name="com.example.bestsecret.ui.ProductsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginEnd="@dimen/general_half_margin"
     android:paddingTop="@dimen/general_margin"
     android:clipToPadding="false"
     app:layoutManager="LinearLayoutManager"

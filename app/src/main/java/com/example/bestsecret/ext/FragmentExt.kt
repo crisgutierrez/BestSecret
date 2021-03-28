@@ -1,11 +1,13 @@
 package com.example.bestsecret.ext
 
+import android.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.bestsecret.R
+import com.example.bestsecret.domain.model.Product
 import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.showError(throwable: Throwable?) {
@@ -47,4 +49,17 @@ internal fun Fragment.loadingView(): View? {
     }
 
     return null
+}
+
+fun Fragment.showDialog(
+    text: String,
+    buttonText: String,
+    onOkClick: (() -> Unit)? = null
+) {
+    AlertDialog.Builder(requireActivity()).
+    setMessage(text).
+    setPositiveButton(buttonText){ dialog, _ ->
+        onOkClick?.invoke()
+        dialog.dismiss()
+    }.create().show()
 }

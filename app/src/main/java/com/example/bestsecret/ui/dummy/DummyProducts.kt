@@ -33,9 +33,9 @@ object DummyProducts {
             brand = "Tommy Hilfiger",
             price = 80,
             currency = "€",
-            discountPercentage = if (position % 3 == 0 ) 0 else 40,
+            discountPercentage = if (position % 3 == 0 ) 0 else (1..80).random(), // This is to test products with no discount
             image = "https://picsum.photos/id/$position/1920/1080",
-            stock = 8,
+            stock = if (position % 3 == 0 ) 0 else (1..30).random(), // This is to test products with no stock
             link = "http://bestsecret-recruitment-api.herokuapp.com/products/$position",
             type = "productDetails"
 
