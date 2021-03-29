@@ -1,5 +1,6 @@
 package com.example.bestsecret.di
 
+import com.example.bestsecret.domain.repository.ProductListRepository
 import com.example.bestsecret.domain.repository.ProductRepository
 import com.example.bestsecret.domain.usecase.GetAllProductsUseCase
 import com.example.bestsecret.domain.usecase.GetProductByIdUseCase
@@ -16,9 +17,9 @@ object UseCaseModule {
     @Singleton
     @Provides
     fun provideGetAllProductsUseCase(
-        productRepository: ProductRepository
+        productListRepository: ProductListRepository
     ): GetAllProductsUseCase {
-        return GetAllProductsUseCase(productRepository)
+        return GetAllProductsUseCase(productListRepository)
     }
 
     @Singleton

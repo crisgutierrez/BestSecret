@@ -50,8 +50,7 @@ class ProductDetailsFragment : Fragment() {
         setAppBar()
         setObserver()
 
-//        viewModel.setStateEvent(ProductDetailsStateEvent.GetProductByIdEvent(fragmentArgs.productId))
-        setLayout(DummyProducts.ITEMS[fragmentArgs.productId - 1]) // Todo this is only for testing remove once we finished
+        viewModel.setStateEvent(ProductDetailsStateEvent.GetProductByIdEvent(fragmentArgs.productId))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -83,15 +82,12 @@ class ProductDetailsFragment : Fragment() {
                     hideInProgress()
                     if (product != null) {
                         setLayout(product)
-                    } else {
-                        setLayout(DummyProducts.ITEMS[fragmentArgs.productId - 1])
                     }
                 }
                 is DataState.Failure -> {
                     Log.e(TAG, "Failure", dataState.error)
                     hideInProgress()
                     showError(dataState.error)
-                    setLayout(DummyProducts.ITEMS[fragmentArgs.productId - 1])
                 }
                 is DataState.InProgress -> {
                     Log.e(TAG, "In progress")

@@ -33,10 +33,7 @@ constructor(
     }
 
     override suspend fun getAll(params: ProductQueryParam): List<Product>? {
-        return if (params is ProductQueryParam.QueryAllProducts) {
-            val networkProduct = productService.getAllProducts(params.page, params.pageSize)
-            productNetworkMapper.toModelList(networkProduct.list)
-        } else null
+        TODO("Not yet implemented")
     }
 
     override suspend fun update(params: Unit): Product? {
