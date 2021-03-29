@@ -1,0 +1,60 @@
+{
+  "list":[
+    {
+      "id":1,
+      "name":"shirts",
+      "brand":"Tommy Hilfiger",
+      "price":80,
+      "currency":"€",
+      "image":"https://picture.bestsecret.com/static/images/1041/image_31394462_20_620x757_0.jpg",
+      "_link":"http://bestsecret-recruitment-api.herokuapp.com/products/1",
+      "_type":"product"
+    },
+    {
+      "id":2,
+      "name":"shirts",
+      "brand":"Ralph Lauren",
+      "price":65,
+      "currency":"€",
+      "image":"https://picture.bestsecret.com/static/images/1101/image_31253398_20_620x757_0.jpg",
+      "_link":"http://bestsecret-recruitment-api.herokuapp.com/products/2",
+      "_type":"product"
+    },
+    {
+      "id":3,
+      "name":"shirts",
+      "brand":"Calvin Klein",
+      "price":50,
+      "currency":"€",
+      "image":"https://picture.bestsecret.com/static/images/907/image_31291071_33_620x757_0.jpg",
+      "_link":"http://bestsecret-recruitment-api.herokuapp.com/products/3",
+      "_type":"product"
+    },
+    {
+      "id":4,
+      "name":"shirts",
+      "brand":"Guess",
+      "price":42,
+      "currency":"€",
+      "image":"https://picture.bestsecret.com/static/images/1101/image_31549260_10_620x757_0.jpg",
+      "_link":"http://bestsecret-recruitment-api.herokuapp.com/products/4",
+      "_type":"product"
+    },
+    {
+      "id":5,
+      "name":"shoes",
+      "brand":"Guess",
+      "price":100,
+      "currency":"€",
+      "image":"https://picture.bestsecret.com/static/images/1126/image_31472882_20_970x1182_0.jpg",
+      "_link":"http://bestsecret-recruitment-api.herokuapp.com/products/5",
+      "_type":"product"
+    }
+  ],
+  "page":1,
+  "pageSize":5,
+  "size":"20",
+  "_link":"http://bestsecret-recruitment-api.herokuapp.com/products?page=1&pageSize=5",
+  "_type":"products",
+  "_next":"http://bestsecret-recruitment-api.herokuapp.com/products?page=2&pageSize=5"
+}

@@ -17,7 +17,7 @@ import com.example.bestsecret.R
 import com.example.bestsecret.domain.model.Product
 import com.example.bestsecret.domain.state.DataState
 import com.example.bestsecret.ext.*
-import com.example.bestsecret.ui.dummy.DummyProducts
+import com.example.bestsecret.data.testsupport.DummyProducts
 import com.example.bestsecret.ui.viewmodel.ProductDetailsStateEvent
 import com.example.bestsecret.ui.viewmodel.ProductDetailsViewModel
 import com.example.bestsecret.utils.formatNumberToTwoDigits
@@ -50,8 +50,8 @@ class ProductDetailsFragment : Fragment() {
         setAppBar()
         setObserver()
 
-//        viewModel.setStateEvent(ProductDetailsStateEvent.GetProductByIdEvent(fragmentArgs.productId))
-        setLayout(DummyProducts.ITEMS[fragmentArgs.productId - 1]) // Todo this is only for testing remove once we finished
+        viewModel.setStateEvent(ProductDetailsStateEvent.GetProductByIdEvent(fragmentArgs.productId))
+//        setLayout(DummyProducts.ITEMS[fragmentArgs.productId - 1]) // Todo this is only for testing remove once we finished
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

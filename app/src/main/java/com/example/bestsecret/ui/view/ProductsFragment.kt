@@ -20,7 +20,7 @@ import com.example.bestsecret.ext.showInProgress
 import com.example.bestsecret.ui.viewmodel.MainStateEvent
 import com.example.bestsecret.ui.viewmodel.ProductsViewModel
 import com.example.bestsecret.ui.adapter.ProductsAdapter
-import com.example.bestsecret.ui.dummy.DummyProducts
+import com.example.bestsecret.data.testsupport.DummyProducts
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_products.*
 
@@ -61,8 +61,8 @@ class ProductsFragment : Fragment() {
         setLayout()
         setObserver()
 
-//        viewModel.setStateEvent(MainStateEvent.GetAllProductsEvent)
-        productsAdapter.setProducts(DummyProducts.ITEMS) // Todo this is just for testing remove it once we finish testing
+        viewModel.setStateEvent(MainStateEvent.GetAllProductsEvent)
+//        productsAdapter.setProducts(DummyProducts.ITEMS) // Todo this is just for testing remove it once we finish testing
     }
     // endregion
 
@@ -77,7 +77,7 @@ class ProductsFragment : Fragment() {
     }
 
     private fun setAppBar() {
-        (activity as MainActivity?)!!.supportActionBar.let {
+        (activity as? MainActivity?)?.supportActionBar.let {
             it?.title = getString(R.string.product_app_bar_title)
             it?.setDisplayHomeAsUpEnabled(false)
         }

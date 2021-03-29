@@ -19,8 +19,8 @@ constructor():EntityMapper<Product, ProductNetworkEntity> {
             discountPercentage = entity.discountPercentage,
             image = entity.image,
             stock = entity.stock,
-            link = entity.link,
-            type = entity.type
+            link = entity._link,
+            type = entity._type
         )
 
     override fun toEntity(model: Product): ProductNetworkEntity =
@@ -34,7 +34,7 @@ constructor():EntityMapper<Product, ProductNetworkEntity> {
             discountPercentage = model.discountPercentage,
             image = model.image,
             stock = model.stock,
-            link = model.link,
-            type = model.type
+            _link = model.link,
+            _type = model.type
         )
 }

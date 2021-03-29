@@ -15,7 +15,7 @@ data class ProductCacheEntity(
     val name: String,
 
     @ColumnInfo(name = "description")
-    val description: String,
+    val description: String?,
 
     @ColumnInfo(name = "brand")
     val brand: String,
