@@ -1,6 +1,6 @@
 package com.example.bestsecret.domain.datasource
 
-interface DataSource<T, CreationParams, QueryParams, UpdateParams, DeleteParams> {
+interface DataSource<T, R, CreationParams, QueryParams, UpdateParams, DeleteParams> {
 
     suspend fun create(params: CreationParams): T
 
@@ -10,7 +10,7 @@ interface DataSource<T, CreationParams, QueryParams, UpdateParams, DeleteParams>
 
     suspend fun get(params: QueryParams): T
 
-    suspend fun getAll(params: QueryParams): List<T>?
+    suspend fun getAll(params: QueryParams): R
 
     suspend fun update(params: UpdateParams): T
 
