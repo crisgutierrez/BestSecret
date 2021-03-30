@@ -1,4 +1,4 @@
-package com.example.bestsecret.ui.dummy
+package com.example.bestsecret.data.testsupport
 
 import com.example.bestsecret.domain.model.Product
 import java.util.*

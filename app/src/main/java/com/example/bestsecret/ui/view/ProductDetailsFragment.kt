@@ -17,9 +17,10 @@ import com.example.bestsecret.R
 import com.example.bestsecret.domain.model.Product
 import com.example.bestsecret.domain.state.DataState
 import com.example.bestsecret.ext.*
-import com.example.bestsecret.ui.dummy.DummyProducts
+import com.example.bestsecret.data.testsupport.DummyProducts
 import com.example.bestsecret.ui.viewmodel.ProductDetailsStateEvent
 import com.example.bestsecret.ui.viewmodel.ProductDetailsViewModel
+import com.example.bestsecret.utils.EspressoIdlingResource
 import com.example.bestsecret.utils.formatNumberToTwoDigits
 import com.example.bestsecret.utils.getPriceWithDiscount
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,7 +68,7 @@ class ProductDetailsFragment : Fragment() {
 
     // region PRIVATE METHODS -----------------------------------------------------------------------
     private fun setAppBar() {
-        (activity as MainActivity?)!!.supportActionBar.let {
+        (activity as? MainActivity?)?.supportActionBar.let {
             it?.title = getString(R.string.product_details_app_bar_title)
             it?.setDisplayHomeAsUpEnabled(true)
         }
@@ -94,7 +95,7 @@ class ProductDetailsFragment : Fragment() {
                     showInProgress()
                 }
             }
-
+            EspressoIdlingResource.decrement()
         })
     }
 

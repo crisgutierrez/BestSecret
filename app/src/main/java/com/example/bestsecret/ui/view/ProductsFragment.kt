@@ -22,6 +22,7 @@ import com.example.bestsecret.ext.showInProgress
 import com.example.bestsecret.ui.adapter.ProductsAdapter
 import com.example.bestsecret.ui.viewmodel.MainStateEvent
 import com.example.bestsecret.ui.viewmodel.ProductsViewModel
+import com.example.bestsecret.utils.EspressoIdlingResource
 import com.example.bestsecret.utils.PRODUCTS_PAGE_SIZE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_products.*
@@ -124,7 +125,7 @@ class ProductsFragment : Fragment() {
     }
 
     private fun setAppBar() {
-        (activity as MainActivity?)!!.supportActionBar.let {
+        (activity as? MainActivity?)?.supportActionBar.let {
             it?.title = getString(R.string.product_app_bar_title)
             it?.setDisplayHomeAsUpEnabled(false)
         }
@@ -157,7 +158,7 @@ class ProductsFragment : Fragment() {
                     isLoading = true
                 }
             }
-
+            EspressoIdlingResource.decrement()
         })
     }
     // endregion

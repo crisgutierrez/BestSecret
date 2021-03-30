@@ -19,7 +19,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.bestsecret.MyTestRunner"
     }
 
     buildTypes {
@@ -53,7 +53,11 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test.ext:junit:$junit_ext"
+
+    // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_core"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espresso_core"
 
 //  Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"

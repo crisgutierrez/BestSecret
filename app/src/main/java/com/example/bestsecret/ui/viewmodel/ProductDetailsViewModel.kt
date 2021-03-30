@@ -5,6 +5,7 @@ import com.example.bestsecret.domain.model.Product
 import com.example.bestsecret.domain.model.ProductQueryParam
 import com.example.bestsecret.domain.state.DataState
 import com.example.bestsecret.domain.usecase.GetProductByIdUseCase
+import com.example.bestsecret.utils.EspressoIdlingResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -24,6 +25,7 @@ constructor(
 
     // region PUBLIC METHODS -----------------------------------------------------------------------
     fun setStateEvent(stateEvent: ProductDetailsStateEvent) {
+        EspressoIdlingResource.increment()
         viewModelScope.launch {
             when(stateEvent) {
                 is ProductDetailsStateEvent.GetProductByIdEvent -> { getProductById(stateEvent.productId) }
