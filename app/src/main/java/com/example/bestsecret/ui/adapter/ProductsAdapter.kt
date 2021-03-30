@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bestsecret.R
 import com.example.bestsecret.domain.model.Product
 import com.example.bestsecret.ext.loadFromUrl
+import com.example.bestsecret.utils.EspressoIdlingResource
 import com.example.bestsecret.utils.formatNumberToTwoDigits
 import com.example.bestsecret.utils.getPriceWithDiscount
 
@@ -20,8 +23,20 @@ class ProductsAdapter(
     private val onAddToCartClick: () -> Unit
 ) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
-    private var productList: List<Product> = emptyList()
     private lateinit var context: Context
+
+    private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Product>() {
+
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -31,7 +46,7 @@ class ProductsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val product = productList[position]
+        val product = differ.currentList[position]
         holder.productImage.loadFromUrl(product.image)
         holder.productName.text = product.name
         holder.productPrice.text = context.getString(R.string.product_item_price, getPriceWithDiscount(product.price, product.discountPercentage), product.currency)
@@ -57,11 +72,14 @@ class ProductsAdapter(
 
     }
 
-    override fun getItemCount(): Int = productList.size
+    override fun getItemCount(): Int = differ.currentList.size
 
     fun setProducts(newList: List<Product>) {
-        productList = newList
-        notifyDataSetChanged()
+        EspressoIdlingResource.increment()
+        val dataCommitCallback = Runnable {
+            EspressoIdlingResource.decrement()
+        }
+        differ.submitList(newList, dataCommitCallback)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

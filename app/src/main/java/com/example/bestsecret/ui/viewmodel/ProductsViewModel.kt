@@ -6,6 +6,7 @@ import com.example.bestsecret.domain.model.ProductList
 import com.example.bestsecret.domain.model.ProductQueryParam
 import com.example.bestsecret.domain.state.DataState
 import com.example.bestsecret.domain.usecase.GetAllProductsUseCase
+import com.example.bestsecret.utils.EspressoIdlingResource
 import com.example.bestsecret.utils.PRODUCTS_PAGE_SIZE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -27,6 +28,7 @@ constructor(
 
     // region PUBLIC METHODS -----------------------------------------------------------------------
     fun setStateEvent(mainStateEvent: MainStateEvent) {
+        EspressoIdlingResource.increment()
         viewModelScope.launch {
             when(mainStateEvent) {
                 is MainStateEvent.GetAllProductsEvent -> {

@@ -1,10 +1,9 @@
-package com.example.bestsecret.data
+package com.example.bestsecret.data.db
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.example.bestsecret.data.db.AppDatabase
 import com.example.bestsecret.data.db.dao.ProductDao
 import com.example.bestsecret.data.testsupport.DUMMY_PRODUCT_ENTITY_1
 import com.example.bestsecret.data.testsupport.DUMMY_PRODUCT_ENTITY_1_MORE_STOCK
