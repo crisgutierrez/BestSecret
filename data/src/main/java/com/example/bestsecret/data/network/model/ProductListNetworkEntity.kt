@@ -7,5 +7,5 @@ data class ProductListNetworkEntity(
     val size: Int,
     val _link: String,
     val _type: String,
-    val _next: String
+    val _next: String?
 )

@@ -25,7 +25,7 @@ interface ProductDao {
     suspend fun getAllProducts(): List<ProductCacheEntity>
 
     @Query("SELECT * FROM ${ProductCacheEntity.TABLE_NAME} WHERE id LIKE :productId")
-    suspend fun getProductById(productId: Int): ProductCacheEntity
+    suspend fun getProductById(productId: Int): ProductCacheEntity?
 
 
     //DELETE
