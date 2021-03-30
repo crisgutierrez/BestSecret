@@ -9,6 +9,7 @@
     android:layout_marginEnd="@dimen/general_half_margin"
     android:paddingTop="@dimen/general_margin"
     android:clipToPadding="false"
+    android:background="@color/background_color"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.view.ProductsFragment"
     tools:listitem="@layout/product_item" />
