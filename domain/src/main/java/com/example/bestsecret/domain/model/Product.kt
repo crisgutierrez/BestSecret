@@ -3,7 +3,7 @@ package com.example.bestsecret.domain.model
 data class Product(
     val id: Int,
     val name: String,
-    val description: String,
+    val description: String?,
     val brand: String,
     val price: Int,
     val currency: String,
