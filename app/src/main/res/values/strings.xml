@@ -12,6 +12,8 @@
 <!--    Product details     -->
     <string name="product_details_app_bar_title">Product details</string>
     <string name="product_details_add_cart_button">Add to cart</string>
-    <string name="product_details_notify_when_is_available_button">Notify me when available</string>
+    <string name="product_details_notify_when_is_available_button">Notify me when\navailable</string>
+    <string name="product_details_dialog_error_message">This product is temporarily unavailable</string>
+    <string name="product_details_dialog_go_back">GO BACK</string>
 
 </resources>

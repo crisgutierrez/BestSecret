@@ -78,7 +78,7 @@ class ProductDetailsFragment : Fragment() {
             when(dataState){
                 is DataState.Success -> {
                     val product = dataState.data
-                    Log.e(TAG, "Success data: $product")
+                    Log.d(TAG, "Success data: $product")
                     hideInProgress()
                     if (product != null) {
                         setLayout(product)
@@ -87,10 +87,10 @@ class ProductDetailsFragment : Fragment() {
                 is DataState.Failure -> {
                     Log.e(TAG, "Failure", dataState.error)
                     hideInProgress()
-                    showError(dataState.error)
+                    handleError()
                 }
                 is DataState.InProgress -> {
-                    Log.e(TAG, "In progress")
+                    Log.d(TAG, "In progress")
                     showInProgress()
                 }
             }
@@ -146,6 +146,19 @@ class ProductDetailsFragment : Fragment() {
 
         product_details_discount.isVisible = product.discountPercentage > MIN_DISCOUNT_FOR_HOT_SALE
         product_details_discount.loadFromResources(R.drawable.deal_image)
+    }
+
+    /**
+     * If there was an error loading the product detail we show an error dialog and if the user press
+     * go back button we navigate back to the list of products.
+     */
+    private fun handleError() {
+        showDialog(
+                text = getString(R.string.product_details_dialog_error_message),
+                buttonText = getString(R.string.product_details_dialog_go_back),
+                isCancellable = false) {
+            findNavController().popBackStack()
+        }
     }
     // endregion
 

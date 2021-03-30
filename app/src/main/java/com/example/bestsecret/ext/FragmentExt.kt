@@ -54,11 +54,13 @@ internal fun Fragment.loadingView(): View? {
 fun Fragment.showDialog(
     text: String,
     buttonText: String,
+    isCancellable: Boolean = true,
     onOkClick: (() -> Unit)? = null
 ) {
-    AlertDialog.Builder(requireActivity()).
-    setMessage(text).
-    setPositiveButton(buttonText){ dialog, _ ->
+    AlertDialog.Builder(requireActivity())
+            .setMessage(text)
+            .setCancelable(isCancellable)
+            .setPositiveButton(buttonText){ dialog, _ ->
         onOkClick?.invoke()
         dialog.dismiss()
     }.create().show()

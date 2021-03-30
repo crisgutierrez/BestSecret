@@ -134,8 +134,9 @@ class ProductsFragment : Fragment() {
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
             when(dataState){
                 is DataState.Success -> {
-                    val productList = dataState.data
                     hideInProgress()
+                    val productList = dataState.data
+                    Log.d(TAG, "Success data: $productList")
                     isLoading = false
                     if (productList != null) {
                         productsAdapter.setProducts(productList.list)
@@ -146,11 +147,13 @@ class ProductsFragment : Fragment() {
                 }
                 is DataState.Failure -> {
                     hideInProgress()
+                    Log.e(TAG, "Failure", dataState.error)
                     isLoading = false
                     showError(dataState.error)
                 }
                 is DataState.InProgress -> {
                     showInProgress()
+                    Log.d(TAG, "In progress")
                     isLoading = true
                 }
             }
