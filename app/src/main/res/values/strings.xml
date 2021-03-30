@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">BestSecret</string>
+
+<!--    General Product text    -->
+    <string name="product_app_bar_title">Products</string>
+    <string name="product_item_old_price">%1$s %2$s</string>
+    <string name="product_item_price">%1$s %2$s</string>
+    <string name="product_item_discount"> -%1$d%% </string>
+    <string name="product_dialog_feature_not_implemented">This feature is not implemented yet. Stay  tuned, it\'s coming soon!</string>
+    <string name="product_dialog_ok">OK</string>
+
+<!--    Product details     -->
+    <string name="product_details_app_bar_title">Product details</string>
+    <string name="product_details_add_cart_button">Add to cart</string>
+    <string name="product_details_notify_when_is_available_button">Notify me when\navailable</string>
+    <string name="product_details_dialog_error_message">This product is temporarily unavailable</string>
+    <string name="product_details_dialog_go_back">GO BACK</string>
+
 </resources>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="@dimen/general_half_margin"
+    android:layout_marginBottom="@dimen/general_half_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/create_network_for_me"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/general_tiny_margin"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/product_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/product_item_image_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/product_item_favorite"
+                android:layout_width="@dimen/general_icon_size"
+                android:layout_height="@dimen/general_icon_size"
+                android:layout_marginTop="@dimen/general_half_margin"
+                android:layout_marginEnd="@dimen/general_half_margin"
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintEnd_toEndOf="@+id/product_item_image"
+                app:layout_constraintTop_toTopOf="@+id/product_item_image" />
+
+            <TextView
+                android:id="@+id/product_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/general_margin"
+                android:textSize="@dimen/product_item_name_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_item_image"
+                tools:text="Men shirt" />
+
+            <TextView
+                android:id="@+id/product_item_old_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/general_quarter_margin"
+                android:layout_marginStart="@dimen/general_margin"
+                android:textSize="@dimen/product_item_secondary_price_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_item_name"
+                tools:text="80,00€" />
+
+            <TextView
+                android:id="@+id/product_item_discount"
+                style="@style/DiscountTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/general_margin"
+                android:layout_marginTop="@dimen/general_quarter_margin"
+                android:paddingStart="@dimen/general_quarter_margin"
+                android:paddingEnd="@dimen/general_quarter_margin"
+                android:textSize="@dimen/product_item_secondary_price_size"
+                app:layout_constraintStart_toEndOf="@+id/product_item_old_price"
+                app:layout_constraintTop_toBottomOf="@+id/product_item_name"
+                tools:text="-40%" />
+
+            <TextView
+                android:id="@+id/product_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/general_quarter_margin"
+                android:layout_marginStart="@dimen/general_margin"
+                android:layout_marginBottom="@dimen/general_margin"
+                android:textSize="@dimen/product_item_price_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_item_old_price"
+                tools:text="50,00€" />
+
+            <ImageView
+                android:id="@+id/product_item_add_to_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/general_half_margin"
+                android:src="@drawable/ic_add_cart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/product_item_price" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

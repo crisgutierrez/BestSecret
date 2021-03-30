@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_details_container"
+    android:background="@color/background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.ProductDetailsFragment">
+
+    <ImageView
+        android:id="@+id/product_details_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_product_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/product_details_favorite"
+        android:layout_width="@dimen/general_icon_size"
+        android:layout_height="@dimen/general_icon_size"
+        android:layout_marginEnd="@dimen/general_margin"
+        android:layout_marginTop="@dimen/general_margin"
+        android:src="@drawable/ic_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/product_details_discount"
+        android:layout_width="@dimen/product_details_discount_image_size"
+        android:layout_height="@dimen/product_details_discount_image_size"
+        android:layout_marginEnd="@dimen/general_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_product_discount" />
+
+    <TextView
+        android:id="@+id/product_details_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/general_margin"
+        android:layout_marginStart="@dimen/general_margin"
+        android:layout_marginEnd="@dimen/general_margin"
+        app:layout_constraintEnd_toStartOf="@+id/product_details_discount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_details_image"
+        tools:text="Shirt"/>
+
+    <TextView
+        android:id="@+id/product_details_brand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/general_quarter_margin"
+        android:layout_marginStart="@dimen/general_margin"
+        android:layout_marginEnd="@dimen/general_margin"
+        app:layout_constraintEnd_toStartOf="@+id/product_details_discount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_details_name"
+        tools:text="Zara"/>
+
+    <TextView
+        android:id="@+id/product_details_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/general_quarter_margin"
+        android:layout_marginEnd="@dimen/general_margin"
+        android:layout_marginStart="@dimen/general_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_details_brand"
+        tools:text="This is the a great shirt for going out with friends" />
+
+    <TextView
+        android:id="@+id/product_details_old_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/general_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/product_details_add_cart_button"
+        app:layout_constraintBottom_toBottomOf="@+id/product_details_add_cart_button"
+        tools:text="150€" />
+
+    <TextView
+        android:id="@+id/product_details_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/general_margin"
+        style="@style/PriceWithDiscountStyle"
+        android:textSize="@dimen/product_item_price_size"
+        app:layout_constraintStart_toEndOf="@+id/product_details_old_price"
+        app:layout_constraintTop_toTopOf="@+id/product_details_add_cart_button"
+        app:layout_constraintBottom_toBottomOf="@+id/product_details_add_cart_button"
+        tools:text="100€" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/product_details_add_cart_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/general_margin"
+        android:layout_marginTop="@dimen/general_double_margin"
+        android:layout_marginEnd="@dimen/general_margin"
+        android:text="@string/product_details_add_cart_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_details_description" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_product_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.32"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_product_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
