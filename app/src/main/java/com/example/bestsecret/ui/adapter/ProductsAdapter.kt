@@ -25,18 +25,7 @@ class ProductsAdapter(
 
     private lateinit var context: Context
 
-    private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Product>() {
-
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem == newItem
-        }
-
-    }
-    private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
+    private var productList: List<Product> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -46,7 +35,7 @@ class ProductsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val product = differ.currentList[position]
+        val product = productList[position]
         holder.productImage.loadFromUrl(product.image)
         holder.productName.text = product.name
         holder.productPrice.text = context.getString(R.string.product_item_price, getPriceWithDiscount(product.price, product.discountPercentage), product.currency)
@@ -72,14 +61,37 @@ class ProductsAdapter(
 
     }
 
-    override fun getItemCount(): Int = differ.currentList.size
+    override fun getItemCount(): Int = productList.size
 
     fun setProducts(newList: List<Product>) {
-        EspressoIdlingResource.increment()
-        val dataCommitCallback = Runnable {
-            EspressoIdlingResource.decrement()
+        val oldList = productList
+        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
+            ProductItemDiffCallback(oldList, newList)
+        )
+        productList = newList
+        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
+    }
+
+    class ProductItemDiffCallback(
+        var oldProductList: List<Product>,
+        var newProductList: List<Product>,
+    ): DiffUtil.Callback() {
+        override fun getOldListSize(): Int {
+            return oldProductList.size
         }
-        differ.submitList(newList, dataCommitCallback)
+
+        override fun getNewListSize(): Int {
+            return newProductList.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldProductList[oldItemPosition].id == newProductList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldProductList[oldItemPosition] == newProductList[newItemPosition]
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

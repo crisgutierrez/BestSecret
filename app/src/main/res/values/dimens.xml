@@ -8,11 +8,12 @@
     <dimen name="general_zero_margin">0dp</dimen>
     <dimen name="general_one_and_half_margin">24dp</dimen>
     <dimen name="general_double_margin">32dp</dimen>
+    <dimen name="general_tiny_margin">2dp</dimen>
 
     <dimen name="general_icon_size">24dp</dimen>
 
 <!--    Product Item dimens  -->
-    <dimen name="product_item_image_height">300dp</dimen>
+    <dimen name="product_item_image_height">250dp</dimen>
     <dimen name="product_item_name_size">12sp</dimen>
     <dimen name="product_item_secondary_price_size">14sp</dimen>
     <dimen name="product_item_price_size">18sp</dimen>
